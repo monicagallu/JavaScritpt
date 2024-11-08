@@ -1,4 +1,4 @@
-/*// Variables globales
+// Variables globales
 let carrito = [];
 let totalCompra = 0;
 
@@ -100,4 +100,4 @@ do {
             alert("Opción no válida. Intente de nuevo.");
             break;
     }
-} while (opcion !== 4);*/
+} while (opcion !== 4);
