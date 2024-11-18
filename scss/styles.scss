@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #C7D1D9;
+    color: #315259;
+
+    header {
+        background-color: #C7D1D9;
+        color: #315259;
+    }
+
+    main {
+        .btn {
+            font-weight: bold;
+            transition: all 0.3s;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+
+        #logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin: 10px;
+          }
+
+        #resultado {
+            background-color: #fff;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            text-align: center;
+        }
+    }
+
+    footer {
+        background-color: #C7D1D9;
+    }
+}
