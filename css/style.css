@@ -29,6 +29,30 @@ body main #resultado {
   border-radius: 50%;
   margin: 10px;
 }
+
+body {
+  background-color: #C7D1D9; 
+  font-family: 'Playfair Display', serif; 
+  color: #315259; 
+}
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #F2BEA0; 
+  border: 5px solid #BF6A4B; 
+  border-radius: 15px; 
+  max-width: 300px; 
+  margin: 30px auto; 
+}
+
+.logo {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(3px 3px 5px #8C4A3B); 
+}
+
 body footer {
   background-color: #222;
 }

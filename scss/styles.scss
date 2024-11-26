@@ -8,6 +8,31 @@ body {
         color: #315259;
     }
 
+    body {
+        background-color: #C7D1D9; // Fondo general de la página
+        font-family: 'Playfair Display', serif; // Fuente principal elegante
+        color: #315259; // Color principal del texto
+    }
+    
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background-color: #F2BEA0; 
+        border: 5px solid #BF6A4B; 
+        border-radius: 15px; 
+        max-width: 300px; 
+        margin: 30px auto; 
+    }
+    
+    .logo {
+        max-width: 100%;
+        height: auto;
+        filter: drop-shadow(3px 3px 5px #8C4A3B); 
+    }
+    
+
     main {
         .btn {
             font-weight: bold;
@@ -16,6 +41,11 @@ body {
             &:hover {
                 transform: scale(1.05);
             }
+        }
+
+        .btn {
+            background-color: #BF6A4B;
+            border-bottom: #8C4A3B;
         }
 
         #logo {

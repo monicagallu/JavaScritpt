@@ -7,12 +7,37 @@ body header {
   background-color: #C7D1D9;
   color: #315259;
 }
+body body {
+  background-color: #C7D1D9;
+  font-family: "Playfair Display", serif;
+  color: #315259;
+}
+body .logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #F2BEA0;
+  border: 5px solid #BF6A4B;
+  border-radius: 15px;
+  max-width: 300px;
+  margin: 30px auto;
+}
+body .logo {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(3px 3px 5px #8C4A3B);
+}
 body main .btn {
   font-weight: bold;
   transition: all 0.3s;
 }
 body main .btn:hover {
   transform: scale(1.05);
+}
+body main .btn {
+  background-color: #BF6A4B;
+  border-bottom: #8C4A3B;
 }
 body main #logo {
   width: 45px;
