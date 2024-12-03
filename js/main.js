@@ -6,7 +6,11 @@ const productosDisponibles = [
     { id: 1, nombre: "Camiseta", precio: 20 },
     { id: 2, nombre: "Botella", precio: 10 },
     { id: 3, nombre: "Mat de clase", precio: 30 },
-    { id: 4, nombre: "Ticket Clase", precio: 15 }
+    { id: 4, nombre: "Ticket Clase", precio: 15 },
+    { id: 5, nombre: "Esterilla", precio: 45 },
+    { id: 6, nombre: "Pelota", precio: 10 },
+    { id: 7, nombre: "Manta", precio: 18 },
+    { id: 8, nombre: "leggins", precio: 21 },
 ];
 
 // Operador avanzado: Spread
