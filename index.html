@@ -1,51 +1,68 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es-ES">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talleres</title>
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="path/to/your/styles.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <!-- Toastify -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
     <header class="header text-center">
-        <h1>Nuestra empresa</h1>
-        <p class="subtitulo">Talleres & mindfulness</p>
+        <h1>Nuestra Empresa</h1>
+        <h2 class="subtitulo">Talleres & Mindfulness</h2>
     </header>
     <main class="container">
         <section id="productos" class="productos">
             <h2 class="text-center">Productos Disponibles</h2>
-            <div class="mb-3">
-                <label for="filtro-nombre" class="form-label">Filtrar por nombre:</label>
-                <input type="text" class="form-control" id="filtro-nombre" placeholder="Escribe el nombre del producto">
-            </div>
-            <button id="btn-buscar" class="btn btn-primary mb-3">Buscar</button>
+            <form>
+                <div class="mb-3">
+                    <label for="filtro-nombre" class="form-label">Filtrar por nombre:</label>
+                    <input type="text" class="form-control" id="filtro-nombre" placeholder="Escribe el nombre del producto">
+                </div>
+                <button id="btn-buscar" class="btn btn-primary mb-3" type="submit">Buscar</button>
+            </form>
             <div class="row" id="productos-lista"></div>
         </section>
         <section id="carrito" class="carrito mt-5">
             <h2 class="text-center">Carrito de Compras</h2>
-            <div id="carrito-lista" class="list-group"></div>
+            <div id="carrito-lista" class="list-group" aria-live="polite"></div>
             <button id="vaciar-carrito" class="btn btn-primary mb-3">Vaciar Carrito</button>
             <button id="realizar-compra" class="btn btn-primary mb-3 mx-auto" onclick="realizarCompra()">Realizar Compra</button>
             <h3 id="total" class="text-center mt-3">Total: €0</h3>
+            <p id="fecha-compra" class="text-center mt-3">Fecha de compra: --</p>
         </section>
         <section id="workshop" class="mt-5">
             <h2 class="text-center">Únete a nuestro Workshop</h2>
             <p class="text-center">Ofrecemos talleres y mindfulness para todos los niveles. ¡Aprovecha nuestra oferta exclusiva para los primeros inscritos!</p>
             <button class="btn btn-primary mb-3 d-block mx-auto" id="btn-more-info">Más información</button>
-            <div id="infoModal" style="display: none;">
+            <div id="infoModal" class="modal" role="dialog" aria-labelledby="modal-title" style="display: none;">
                 <div class="modal-content">
-                    <span id="close" style="cursor: pointer;">&times;</span>
-                    <h2>Información adicional</h2>
+                    <button id="close" style="cursor: pointer;" aria-label="Cerrar información">&times;</button>
+                    <h2 id="modal-title">Información adicional</h2>
                     <p>Este taller cubre temas avanzados.</p>
                 </div>
             </div>
         </section>
     </main>
     <footer class="footer text-center mt-5">
-        <p>© 2024 Talleres y más- Todos los derechos reservados</p>
+        <p>© 2024 Talleres y más - Todos los derechos reservados</p>
+        <nav>
+            <a href="#productos">Productos</a> |
+            <a href="#workshop">Workshop</a>
+        </nav>
     </footer>
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Toastify -->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!-- Luxon -->
+    <script src="https://cdn.jsdelivr.net/npm/luxon/build/global/luxon.min.js"></script>
+    <!-- Script principal -->
     <script src="./js/main.js"></script>
 </body>
 </html>

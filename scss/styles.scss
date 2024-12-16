@@ -1,4 +1,4 @@
-// Nuevas Variables
+// Variables
 $color-fondo: #F2F2F2;
 $color-principal: #117DBF;
 $color-secundario: #05C7F2;
@@ -6,6 +6,14 @@ $color-acento: #2DA635;
 $color-borde: #8CBF3F;
 $fuente-titulo: 'Merriweather', serif;
 $fuente-texto: 'Lato', sans-serif;
+
+@mixin hover-effect($color) {
+    &:hover {
+        background-color: darken($color, 10%);
+        transform: scale(1.05);
+        transition: all 0.3s ease-in-out;
+    }
+}
 
 body {
     background-color: $color-fondo;
@@ -20,9 +28,8 @@ header {
     color: $color-fondo;
     padding: 1.5rem;
     text-align: center;
-    border-bottom: 5px solid $color-borde; // Límite decorativo opcional
+    border-bottom: 5px solid $color-borde;
 }
-
 
 .logo-container {
     display: flex;
@@ -45,86 +52,23 @@ header {
 main {
     .btn {
         font-weight: bold;
-        transition: all 0.3s ease-in-out;
         cursor: pointer;
+        transition: all 0.3s ease-in-out;
     }
-    
+
     .btn-vaciar {
         background-color: $color-acento;
         border: none;
         color: white;
-        &:hover {
-            background-color: darken($color-acento, 10%);
-            transform: scale(1.05);  // Efecto sutil de ampliación
-        }
+        @include hover-effect($color-acento);
     }
 
     .btn-realizar-compra {
         background-color: $color-principal;
         border: none;
         color: white;
-        &:hover {
-            background-color: darken($color-principal, 10%);
-            transform: scale(1.05);
-        }
+        @include hover-effect($color-principal);
     }
-    
-    }
-
-    #logo {
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        margin: 10px;
-    }
-
-    #resultado {
-        background-color: #fff;
-        min-height: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #555;
-        text-align: center;
-    }
-    #infoModal {
-        display: none; /* El modal está oculto por defecto */
-        position: fixed; /* Se posiciona sobre la pantalla */
-        z-index: 1; /* Asegura que el modal esté por encima del contenido */
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto; /* Si hay más contenido, hace scroll */
-        background-color: rgba(0,0,0,0.4); /* Fondo oscuro translúcido */
-    }
-    
-    .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%; /* Puedes ajustar el tamaño */
-    }
-    
-    #close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-    
-    #close:hover,
-    #close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-footer {
-    background-color: $color-principal;
-    color: $color-secundario;
-    padding: 1rem;
 }
 
 #filtro-nombre {
@@ -134,6 +78,55 @@ footer {
     border-radius: 5px;
     border: 1px solid $color-borde;
     margin-bottom: 20px;
+    transition: border-color 0.3s ease-in-out;
+
+    &:focus {
+        border-color: $color-principal;
+        outline: none;
+        box-shadow: 0 0 5px rgba(17, 125, 191, 0.5);
+    }
+}
+
+#infoModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid $color-borde;
+        border-radius: 10px;
+        width: 80%;
+    }
+
+    #close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            color: black;
+            text-decoration: none;
+        }
+    }
+}
+
+footer {
+    background-color: $color-principal;
+    color: $color-secundario;
+    padding: 1rem;
+    text-align: center;
 }
 
 #workshop {
@@ -141,7 +134,7 @@ footer {
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    
+
     h2 {
         color: $color-principal;
     }
@@ -149,9 +142,6 @@ footer {
     button {
         background-color: $color-acento;
         border: none;
-        
-        &:hover {
-            background-color: darken($color-acento, 10%);
-        }
+        @include hover-effect($color-acento);
     }
 }

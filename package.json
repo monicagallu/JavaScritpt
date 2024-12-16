@@ -1,11 +1,36 @@
 {
-  "name": "javascript",
+  "name": "carrito-compra",
   "version": "1.0.0",
-  "description": "",
+  "description": "Carrito de compras interactivo con JavaScript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "live-server",
+    "test": "echo \"Error: no se especificó ninguna prueba\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {},
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Producto 1",
+      "precio": 20,
+      "descripcion": "Descripción del Producto 1"
+    },
+    {
+      "id": 2,
+      "nombre": "Producto 2",
+      "precio": 30,
+      "descripcion": "Descripción del Producto 2"
+    },
+    {
+      "id": 3,
+      "nombre": "Producto 3",
+      "precio": 40,
+      "descripcion": "Descripción del Producto 3"
+    }
+  ]
 }
+
+
+

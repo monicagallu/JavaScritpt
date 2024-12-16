@@ -50,6 +50,17 @@ const agregarAlCarrito = (e) => {
         renderCarrito();
         calcularTotal();
     }
+    
+    // Toastify: Notificación
+    Toastify({
+        text: `${producto.nombre} agregado al carrito`,
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)"
+        }
+    }).showToast();
 };
 
 // Función para renderizar el carrito
@@ -97,12 +108,45 @@ const vaciarCarrito = () => {
     calcularTotal();
 };
 
+function mostrarFechaCompra() {
+    const DateTime = luxon.DateTime;
+    const fecha = DateTime.now().setLocale('es').toLocaleString(DateTime.DATETIME_MED);
+    const fechaCompraElement = document.getElementById("fecha-compra");
+
+    if (fechaCompraElement) {
+        fechaCompraElement.innerText = `Fecha de compra: ${fecha}`;
+    } else {
+        console.error("Elemento para mostrar la fecha de compra no encontrado.");
+    }
+}
+
 function realizarCompra() {
     if (carrito.length > 0) {
-        alert("Compra realizada con éxito.");
-        vaciarCarrito();
+        Swal.fire({
+            title: '¿Confirmar compra?',
+            text: `Total: €${totalCompra}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, comprar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    '¡Compra realizada!',
+                    'Gracias por tu compra.',
+                    'success'
+                );
+                mostrarFechaCompra(); // Muestra la fecha después de confirmar la compra
+                vaciarCarrito(); // Limpia el carrito
+            }
+        });
     } else {
-        alert("El carrito está vacío.");
+        Swal.fire(
+            'El carrito está vacío',
+            'Por favor, añade productos antes de comprar.',
+            'error'
+        );
     }
 }
 
@@ -125,38 +169,163 @@ const filtrarProductos = () => {
     }
 };
 
+// Modal para información adicional
 var modal = document.getElementById("infoModal");
 var btn = document.getElementById("btn-more-info");
 var span = document.getElementById("close");
 
 btn.onclick = function() {
     modal.style.display = "block";
-}
+};
 
 span.onclick = function() {
     modal.style.display = "none";
-}
+};
 
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
+};
+
+const obtenerProductos = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const exito = Math.random() > 0.5; // 50% de probabilidad de éxito
+            if (exito) {
+                resolve(productosDisponibles);
+            } else {
+                reject("Error al cargar los productos.");
+            }
+        }, 2000);
+    });
+};
+
+const cargarProductos = async () => {
+    try {
+        const productos = await obtenerProductos();
+        console.log("Productos cargados:", productos);
+        productosCopia.length = 0; 
+        productosCopia.push(...productos); // Actualiza la copia local
+        renderProductos();
+
+    } catch (error) {
+        Swal.fire(
+            'Error',
+            error.message || 'No se pudieron cargar los productos.',
+            'error'
+        );
+    }
+};
+
+function mostrarFechaCompra() {
+    const DateTime = luxon.DateTime;
+    const fecha = DateTime.now().setLocale('es').toLocaleString(DateTime.DATETIME_MED);
+    const fechaCompraElement = document.getElementById("fecha-compra");
+
+    if (fechaCompraElement) {
+        fechaCompraElement.innerText = `Fecha de compra: ${fecha}`;
+    } else {
+        console.error("Elemento para mostrar la fecha de compra no encontrado.");
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    mostrarFechaCompra();
+});
+
+[
+    {
+        "id": 1,
+        "nombre": "Producto 1",
+        "precio": 20,
+        "descripcion": "Descripción del Producto 1"
+    },
+    {
+        "id": 2,
+        "nombre": "Producto 2",
+        "precio": 30,
+        "descripcion": "Descripción del Producto 2"
+    },
+    {
+        "id": 3,
+        "nombre": "Producto 3",
+        "precio": 40,
+        "descripcion": "Descripción del Producto 3"
+    }
+]
+
+function mostrarProductos(productos) {
+    const productosLista = document.getElementById("productos-lista");
+    productosLista.innerHTML = ""; // Limpiar contenido previo
+    productos.forEach(producto => {
+        const productoHTML = `
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">${producto.nombre}</h5>
+                        <p class="card-text">${producto.descripcion}</p>
+                        <p class="card-text">Precio: €${producto.precio}</p>
+                        <button class="btn btn-primary" onclick="agregarAlCarrito(${producto.id})">Añadir al carrito</button>
+                    </div>
+                </div>
+            </div>`;
+        productosLista.innerHTML += productoHTML;
+    });
+}
+
+function enviarCompra(carrito) {
+    fetch('https://jsonplaceholder.typicode.com/posts', { // URL de prueba
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(carrito)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error al enviar los datos: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Compra realizada:", data);
+        Swal.fire({
+            title: 'Compra realizada',
+            text: '¡Gracias por tu compra!',
+            icon: 'success'
+        });
+    })
+    .catch(error => {
+        console.error("Error al realizar la compra:", error);
+        Swal.fire({
+            title: 'Error',
+            text: 'No se pudo procesar la compra',
+            icon: 'error'
+        });
+    });
+}
+
+// Llama esta función después de realizar la compra
+function realizarCompra() {
+    if (carrito.length === 0) {
+        Swal.fire({
+            title: 'Carrito vacío',
+            text: 'Agrega productos antes de realizar la compra',
+            icon: 'warning'
+        });
+        return;
+    }
+    enviarCompra(carrito); // carrito es el array con los productos seleccionados
 }
 
 
-// Evento para activar el filtro con el botón de búsqueda
-document.getElementById("btn-buscar").addEventListener("click", filtrarProductos);
-
-// Evento para activar el filtro con el botón de búsqueda
-document.getElementById("btn-buscar").addEventListener("click", filtrarProductos);
-
-// Evento de filtro con el botón de búsqueda
-document.getElementById("btn-buscar").addEventListener("click", filtrarProductos);
+// Llamada inicial para cargar productos
+cargarProductos();
 
 // Eventos
-document.getElementById("vaciar-carrito").addEventListener("click", vaciarCarrito);
-
-// Inicialización
 renderProductos();
 renderCarrito();
 calcularTotal();
+document.getElementById("vaciar-carrito").addEventListener("click", vaciarCarrito);
+document.getElementById("btn-buscar").addEventListener("click", filtrarProductos);
